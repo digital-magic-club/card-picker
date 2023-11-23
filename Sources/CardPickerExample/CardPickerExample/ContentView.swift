@@ -10,10 +10,16 @@ import SwiftUI
 import CardPicker
 
 struct ContentView: View {
+  @State private var card: Card?
+
   var body: some View {
     NavigationStack {
       VStack {
-        NavigationLink("CFS", destination: CardPickerView())
+        NavigationLink("CFS", destination: CardPickerView(card: $card))
+
+        if let card {
+          Text(card.description)
+        }
       }
       .padding()
     }
