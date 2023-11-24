@@ -11,7 +11,7 @@
 		2EDB00BD2B0FC188001341F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDB00BC2B0FC188001341F0 /* ContentView.swift */; };
 		2EDB00BF2B0FC188001341F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EDB00BE2B0FC188001341F0 /* Assets.xcassets */; };
 		2EDB00C22B0FC188001341F0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EDB00C12B0FC188001341F0 /* Preview Assets.xcassets */; };
-		2EDB00CC2B0FC1E0001341F0 /* CardPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 2EDB00CB2B0FC1E0001341F0 /* CardPicker */; };
+		2EE33A882B10CE5B00DC3418 /* CardPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 2EE33A872B10CE5B00DC3418 /* CardPicker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EDB00CC2B0FC1E0001341F0 /* CardPicker in Frameworks */,
+				2EE33A882B10CE5B00DC3418 /* CardPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,7 +86,7 @@
 			);
 			name = CardPickerExample;
 			packageProductDependencies = (
-				2EDB00CB2B0FC1E0001341F0 /* CardPicker */,
+				2EE33A872B10CE5B00DC3418 /* CardPicker */,
 			);
 			productName = CardPickerExample;
 			productReference = 2EDB00B72B0FC188001341F0 /* CardPickerExample.app */;
@@ -118,7 +118,7 @@
 			);
 			mainGroup = 2EDB00AE2B0FC188001341F0;
 			packageReferences = (
-				2EDB00CF2B0FC9D3001341F0 /* XCLocalSwiftPackageReference "../.." */,
+				2EE33A862B10CE5B00DC3418 /* XCLocalSwiftPackageReference "../.." */,
 			);
 			productRefGroup = 2EDB00B82B0FC188001341F0 /* Products */;
 			projectDirPath = "";
@@ -357,14 +357,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		2EDB00CF2B0FC9D3001341F0 /* XCLocalSwiftPackageReference "../.." */ = {
+		2EE33A862B10CE5B00DC3418 /* XCLocalSwiftPackageReference "../.." */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../..;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2EDB00CB2B0FC1E0001341F0 /* CardPicker */ = {
+		2EE33A872B10CE5B00DC3418 /* CardPicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CardPicker;
 		};
