@@ -15,7 +15,14 @@ struct ContentView: View {
   var body: some View {
     NavigationStack {
       VStack {
-        NavigationLink("Clock Face Swiping", destination: CardPickerView(card: $card))
+        NavigationLink(
+          "Clock Face Swiping",
+          destination: CardPickerView(
+            card: $card,
+            delayBeforeSending: 2,
+            shouldDismiss: true
+          )
+        )
 
         if let card {
           Text(card.description)

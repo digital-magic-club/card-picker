@@ -77,39 +77,39 @@ public enum Card {
     var identifier: Character {
       switch self {
       case .ace:
-        return "1"
+        "1"
       case .two:
-        return "2"
+        "2"
       case .three:
-        return "3"
+        "3"
       case .four:
-        return "4"
+        "4"
       case .five:
-        return "5"
+        "5"
       case .six:
-        return "6"
+        "6"
       case .seven:
-        return "7"
+        "7"
       case .eight:
-        return "8"
+        "8"
       case .nine:
-        return "9"
+        "9"
       case .ten:
-        return "0"
+        "0"
       case .jack:
-        return "J"
+        "J"
       case .queen:
-        return "Q"
+        "Q"
       case .king:
-        return "K"
+        "K"
       }
     }
     var alternateVoiceValue: Card.Value {
       switch self {
       case .ace:
-        return .king
+        .king
       default:
-        return Card.Value(rawValue: self.rawValue - 1)!
+        Card.Value(rawValue: self.rawValue - 1)!
       }
     }
 
@@ -173,19 +173,19 @@ public enum Card {
     var localizedValue: String {
       switch self {
       case .ace:
-        return NSLocalizedString("Ace",
+        NSLocalizedString("Ace",
                                  comment: "From 'Ace of Hearts'")
       case .jack:
-        return NSLocalizedString("Jack",
+        NSLocalizedString("Jack",
                                  comment: "From 'Jack of Hearts'")
       case .queen:
-        return NSLocalizedString("Queen",
+        NSLocalizedString("Queen",
                                  comment: "From 'Queen of Hearts'")
       case .king:
-        return NSLocalizedString("King",
+        NSLocalizedString("King",
                                  comment: "From 'King of Hearts'")
       default:
-        return "\(rawValue)"
+        "\(rawValue)"
       }
     }
 
@@ -323,52 +323,52 @@ public enum Card {
     var identifier: Character {
       switch self {
       case .spades:
-        return "S"
+        "S"
       case .hearts:
-        return "H"
+        "H"
       case .clubs:
-        return "C"
+        "C"
       case .diamonds:
-        return "D"
+        "D"
       }
     }
 
     var alternateVoiceSuit: Card.Suit {
       switch self {
       case .spades:
-        return .clubs
+        .clubs
       case .clubs:
-        return .spades
+        .spades
       case .hearts:
-        return .diamonds
+        .diamonds
       case .diamonds:
-        return .hearts
+        .hearts
       }
     }
 
     var description: String {
       switch self {
       case .spades:
-        return "♠️"
+        "♠️"
       case .hearts:
-        return "♥️"
+        "♥️"
       case .clubs:
-        return "♣️"
+        "♣️"
       case .diamonds:
-        return "♦️"
+        "♦️"
       }
     }
 
     var localizedSuit: String {
       switch self {
       case .spades:
-        return NSLocalizedString("Spades", comment: "From 'Queen of Spades'")
+        NSLocalizedString("Spades", comment: "From 'Queen of Spades'")
       case .hearts:
-        return NSLocalizedString("Hearts", comment: "From 'Queen of Hearts'")
+        NSLocalizedString("Hearts", comment: "From 'Queen of Hearts'")
       case .clubs:
-        return NSLocalizedString("Clubs", comment: "From 'Queen of Clubs'")
+        NSLocalizedString("Clubs", comment: "From 'Queen of Clubs'")
       case .diamonds:
-        return NSLocalizedString("Diamonds", comment: "From 'Queen of Diamonds'")
+        NSLocalizedString("Diamonds", comment: "From 'Queen of Diamonds'")
       }
     }
 
@@ -535,9 +535,9 @@ public enum Card {
   var alternateVoiceCard: Card {
     switch self {
     case .basic(let value, let suit):
-      return .basic(value: value.alternateVoiceValue, suit: suit.alternateVoiceSuit)
+      .basic(value: value.alternateVoiceValue, suit: suit.alternateVoiceSuit)
     default:
-      return self
+      self
     }
   }
 
@@ -594,10 +594,10 @@ public enum Card {
   var isComplete: Bool {
     switch self {
     case .basic, .joker:
-      return true
+      true
 
     case .incomplete:
-      return false
+      false
     }
   }
 
@@ -626,26 +626,26 @@ extension Card: Equatable {
   public static func == (lhs: Card, rhs: Card) -> Bool {
     switch (lhs, rhs) {
     case let (.basic(valueA, suitA), .basic(valueB, suitB)):
-      return valueA == valueB && suitA == suitB
+      valueA == valueB && suitA == suitB
     case let (.incomplete(valueA, suitA), .incomplete(valueB, suitB)):
-      return valueA == valueB && suitA == suitB
+      valueA == valueB && suitA == suitB
     case (.joker, .joker):
-      return true
+      true
     default:
-      return false
+      false
     }
   }
 }
 
 extension Card: CustomStringConvertible {
   public var description: String {
-    return id
+    description(type: .localized)
   }
 }
 
 extension Card: Identifiable {
   public var id: String {
-    return description(type: .basic)
+    description(type: .basic)
   }
 }
 

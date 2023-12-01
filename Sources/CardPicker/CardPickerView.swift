@@ -16,21 +16,30 @@ public struct CardPickerView: View {
     case right
   }
 
-  @Binding private var card: Card?
+  @Binding private var bindedCard: Card?
 
+  @State private var card: Card?
   @State private var bufferedSwipes = [SwipeAction]()
-  @State private var timer: Timer?
+  @State private var longPressTimer: Timer?
+  @State private var delayBeforeSendingTimer: Timer?
 
   @GestureState private var isDetectingLongPress = false
 
   @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
 
   private let suitsOrder = ["♠️", "♥️", "♣️", "♦️"]
+  private let delayBeforeSending: TimeInterval?
+  private let shouldDismiss: Bool
 
   public init(
-    card: Binding<Card?>
+    card: Binding<Card?>,
+    delayBeforeSending: TimeInterval? = nil,
+    shouldDismiss: Bool = false
   ) {
-    self._card = card
+    self._bindedCard = card
+    self._card = State(initialValue: card.wrappedValue)
+    self.delayBeforeSending = delayBeforeSending
+    self.shouldDismiss = shouldDismiss
   }
 
   public var body: some View {
@@ -45,22 +54,39 @@ public struct CardPickerView: View {
         .simultaneousGesture(
           tapGesture
         )
+        .ignoresSafeArea()
 
-      if let card {
-        Text(card.description)
-      }
+      feedbackView
     }
+    .navigationBarBackButtonHidden(true)
+    .navigationBarHidden(true)
     .colorScheme(.dark)
     .onChange(of: card) { newValue in
-      if let card {
-        print("New card received: \(card)")
+      if let newValue {
+        print("New card received: \(newValue)")
+
+        switch newValue {
+        case .basic, .joker:
+          if let delayBeforeSending {
+            delayBeforeSendingTimer = Timer.scheduledTimer(
+              withTimeInterval: delayBeforeSending,
+              repeats: false
+            ) { _ in
+              bindedCard = card
+              print("Card sent: \(newValue)")
+            }
+          }
+        default:
+          break
+        }
       } else {
         print("Card reset")
         bufferedSwipes.removeAll()
+        delayBeforeSendingTimer?.invalidate()
       }
 
       let feedbackStyle: UIImpactFeedbackGenerator.FeedbackStyle
-      switch card {
+      switch newValue {
       case .basic, .joker:
         feedbackStyle = .heavy
       case .incomplete:
@@ -71,16 +97,25 @@ public struct CardPickerView: View {
       UIImpactFeedbackGenerator(style: feedbackStyle).impactOccurred()
     }
     .onChange(of: isDetectingLongPress) { newValue in
-      timer?.invalidate()
+      longPressTimer?.invalidate()
 
       if isDetectingLongPress {
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+        longPressTimer = Timer.scheduledTimer(
+          withTimeInterval: 0.5,
+          repeats: false
+        ) { _ in
           card = nil
         }
       }
     }
+    .onChange(of: bindedCard) { newValue in
+      if newValue != nil && shouldDismiss {
+        presentationMode.wrappedValue.dismiss()
+      }
+    }
     .onAppear {
       card = nil
+      bindedCard = nil
     }
   }
 }
@@ -88,6 +123,22 @@ public struct CardPickerView: View {
 // MARK: - Private
 
 private extension CardPickerView {
+  @ViewBuilder
+  var feedbackView: some View {
+    if let card {
+      VStack {
+        Spacer()
+        HStack {
+          Spacer()
+          Text(card.description)
+            .font(.system(.footnote))
+            .opacity(0.2)
+        }
+      }
+      .padding()
+    }
+  }
+
   var dragGesture: some Gesture {
     DragGesture()
       .onEnded { gesture in
@@ -132,7 +183,7 @@ private extension CardPickerView {
           break
         }
 
-        presentationMode.wrappedValue.dismiss()
+        bindedCard = card
       }
   }
 
