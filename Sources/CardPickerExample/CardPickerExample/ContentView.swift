@@ -17,11 +17,16 @@ struct ContentView: View {
       VStack {
         NavigationLink(
           "Clock Face Swiping",
-          destination: CardPickerView(
+          destination: ClockFaceSwipingView(
             card: $card,
             delayBeforeSending: 2,
             shouldDismiss: true
           )
+        )
+        
+        NavigationLink(
+          "Home Screen",
+          destination: HomeScreenView(card: $card)
         )
 
         if let card {
