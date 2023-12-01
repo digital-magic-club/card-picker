@@ -1,5 +1,5 @@
 //
-//  CardPickerView.swift
+//  ClockFaceSwipingView.swift
 //  CardPicker
 //
 //  Created by Guillaume Bellut on 22/11/2023.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct CardPickerView: View {
+public struct ClockFaceSwipingView: View {
   enum SwipeAction: String, Equatable {
     case up
     case left
@@ -122,7 +122,7 @@ public struct CardPickerView: View {
 
 // MARK: - Private
 
-private extension CardPickerView {
+private extension ClockFaceSwipingView {
   @ViewBuilder
   var feedbackView: some View {
     if let card {
@@ -230,12 +230,12 @@ private extension CardPickerView {
   }
 }
 
-private extension CardPickerView.SwipeAction {
+private extension ClockFaceSwipingView.SwipeAction {
   var imageSystemName: String {
     return "arrow.\(String(describing: self))"
   }
 
-  static func swipeToInt(_ swipes: [CardPickerView.SwipeAction]) -> Int? {
+  static func swipeToInt(_ swipes: [ClockFaceSwipingView.SwipeAction]) -> Int? {
     guard !swipes.isEmpty else {
       return nil
     }
@@ -293,8 +293,8 @@ private extension CardPickerView.SwipeAction {
       }
 
     default:
-      var twoFirstSwipes = [CardPickerView.SwipeAction]()
-      var otherSwipes = [CardPickerView.SwipeAction]()
+      var twoFirstSwipes = [ClockFaceSwipingView.SwipeAction]()
+      var otherSwipes = [ClockFaceSwipingView.SwipeAction]()
 
       for i in 0 ..< swipes.count {
         if i < 2 {
@@ -317,7 +317,7 @@ private extension CardPickerView.SwipeAction {
     }
   }
 
-  static func swipeToInt(_ swipe: CardPickerView.SwipeAction) -> Int {
+  static func swipeToInt(_ swipe: ClockFaceSwipingView.SwipeAction) -> Int {
     switch swipe {
     case .up:
       return 1
@@ -331,7 +331,7 @@ private extension CardPickerView.SwipeAction {
   }
 }
 
-extension CardPickerView.SwipeAction: Identifiable {
+extension ClockFaceSwipingView.SwipeAction: Identifiable {
   var id: String {
     rawValue
   }
