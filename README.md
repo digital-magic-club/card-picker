@@ -63,7 +63,7 @@ This project is owned and maintained by the Digital Magic Club. You can join the
 
 ## Sponsorship
 
-The [DMC](https://github.com/orgs/digital-magic-club/people) is looking to raise money to officially stay registered as a federal non-profit organization.
+The [DMC](https://github.com/sponsors/digital-magic-club) is looking to raise money to officially stay registered as a federal non-profit organization.
 
 Sponsoring the DMC will enable us to:
 - Pay our yearly legal fees to keep the non-profit in good status,
